@@ -1,0 +1,67 @@
+<script type="text/javascript">
+
+    RED.nodes.registerType('_throttle',{
+        category: 'function',
+        color: '#E6E0F8',
+        defaults: {
+            name: {value:""},
+            nbWaitUnits: {value: "5", required: false, validate: RED.validators.regex(/\d+|/)},
+            waitUnits: {value: "seconds"},
+            leading: {value: true},
+            trailing: {value: true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: 'timer.png',
+        label: function() {
+          if (this.name) {
+            return this.name;
+          }
+
+          return "" + this.nbWaitUnits + this.waitUnits.charAt(0) + " throttle";
+        },
+        oneditprepare: function() {
+          $( "#node-input-wait" ).spinner({min:1});
+          $( "#node-input-nbWaitUnits" ).spinner({min:1});
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="_throttle">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row" id="throttle-details-for">
+            <label for="node-input-nbWaitUnits"><i class="fa fa-clock-o"></i> <span>For</span></label>
+            <input type="text" id="node-input-nbWaitUnits" style="text-align:end; width:50px !important">
+            <select id="node-input-waitUnits" style="width:200px !important">
+              <option value="milliseconds">milliseconds</option>
+              <option value="seconds">seconds</option>
+              <option value="minutes">minutes</option>
+              <option value="hours">hours</option>
+              <option value="days">days</option>
+            </select>
+        </div>
+
+    <div class="form-row" id="rate-details-leading">
+      <input style="display: inline-block; width: auto; vertical-align: top;" type="checkbox" id="node-input-leading">
+      <label style="width: auto" for="node-input-leading">Leading</label>
+    </div>
+
+    <div class="form-row" id="rate-details-trailing">
+      <input style="display: inline-block; width: auto; vertical-align: top;" type="checkbox" id="node-input-trailing">
+      <label style="width: auto" for="node-input-trailing">Trailing</label>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="_throttle">
+  <p>The lodash method _.throttle exposed as a Node-RED node.</p>
+
+  <p>Messages are throttled <em>per topic.</em></p>
+
+  <p><strong>Leading</strong> will send the first message immediately.</p>
+  <p><strong>Trailing</strong> will send the last message at the end of the timeout.</p>
+
+  <p><a href="https://lodash.com/docs/4.17.5#throttle" target="_blank">Check the Lodash documentation for more details.</a></p>
+</script>
