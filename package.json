@@ -1,11 +1,11 @@
 {
   "name": "node-red-contrib-lodash-throttle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The lodash method _.throttle exposed as a Node-RED node.",
   "author": "Antoine Pultier",
   "license": "Apache-2.0",
   "keywords": [
-    "nodered",
+    "node-red",
     "lodash",
     "throttle"
   ],
